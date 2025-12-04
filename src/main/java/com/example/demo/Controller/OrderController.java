@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.Services.OrderService;
 import com.example.demo.entities.Order;
+import com.example.demo.repos.OrderRepository;
 
 @RestController
 @RequestMapping("/api/orders")
@@ -22,6 +23,8 @@ public class OrderController {
 
     @Autowired
     private OrderService orderService;
+    
+    @Autowired OrderRepository orderRepository;
 
     // 1. Place an Order
     @PostMapping
@@ -53,5 +56,10 @@ public class OrderController {
     public String cancel(@PathVariable Long id) {
         orderService.cancelOrder(id);
         return "Order cancelled successfully!";
+    }
+    
+    @GetMapping("/customer/{customerId}")
+    public List<Order> getOrdersByCustomer(@PathVariable Long customerId) {
+        return orderRepository.findByCustomer_Id(customerId);
     }
 }

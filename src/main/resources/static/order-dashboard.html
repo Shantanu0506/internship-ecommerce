@@ -204,7 +204,8 @@
                     tr.innerHTML = `
                         <td>${index + 1}</td>
                         <td>${order.id}</td>
-                        <td>${order.customer ? order.customer.fullName : '—'}</td>
+                        <td>${order.customer ? (order.customer.firstName + ' ' + order.customer.lastName) : '—'}</td>
+
                         <td>${order.totalAmount}</td>
                         <td>${order.orderStatus}</td>
                         <td>${order.shippingAddress || ''}</td>
@@ -249,7 +250,8 @@
                 data.forEach(user => {
                     const opt = document.createElement("option");
                     opt.value = user.id;
-                    opt.textContent = user.fullName + " (" + user.email + ")";
+                    opt.textContent = (user.firstName + " " + user.lastName) + " (" + user.email + ")";
+
                     select.appendChild(opt);
                 });
             })

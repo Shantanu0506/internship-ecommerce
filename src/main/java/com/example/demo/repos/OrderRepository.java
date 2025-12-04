@@ -12,4 +12,6 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
 
     // status filter करायचा असल्यास पुढे वापरू शकतो
     List<Order> findByOrderStatus(String orderStatus);
+    List<Order> findByCustomer_Id(Long customerId);
+
 }
