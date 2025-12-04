@@ -1,9 +1,7 @@
 package com.example.demo.entities;
 
 import java.time.LocalDateTime;
-
 import jakarta.persistence.*;
-
 
 @Entity
 @Table(name = "reviews")
@@ -26,7 +24,8 @@ public class Review {
     @Column(length = 1000)
     private String reviewText;
 
-    private boolean status;   // true = approved, false = unapproved
+    // true = approved, false = unapproved
+    private boolean status;
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
@@ -43,71 +42,67 @@ public class Review {
         updatedAt = LocalDateTime.now();
     }
 
-	public Integer getReviewId() {
-		return reviewId;
-	}
+    public Integer getReviewId() {
+        return reviewId;
+    }
 
-	public void setReviewId(Integer reviewId) {
-		this.reviewId = reviewId;
-	}
+    public void setReviewId(Integer reviewId) {
+        this.reviewId = reviewId;
+    }
 
-	public Product getProduct() {
-		return product;
-	}
+    public Product getProduct() {
+        return product;
+    }
 
-	public void setProduct(Product product) {
-		this.product = product;
-	}
+    public void setProduct(Product product) {
+        this.product = product;
+    }
 
-	public User getCustomer() {
-		return customer;
-	}
+    public User getCustomer() {
+        return customer;
+    }
 
-	public void setCustomer(User customer) {
-		this.customer = customer;
-	}
+    public void setCustomer(User customer) {
+        this.customer = customer;
+    }
 
-	public int getRating() {
-		return rating;
-	}
+    public int getRating() {
+        return rating;
+    }
 
-	public void setRating(int rating) {
-		this.rating = rating;
-	}
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
 
-	public String getReviewText() {
-		return reviewText;
-	}
+    public String getReviewText() {
+        return reviewText;
+    }
 
-	public void setReviewText(String reviewText) {
-		this.reviewText = reviewText;
-	}
+    public void setReviewText(String reviewText) {
+        this.reviewText = reviewText;
+    }
 
-	public boolean isStatus() {
-		return status;
-	}
+    public boolean isStatus() {
+        return status;
+    }
 
-	public void setStatus(boolean status) {
-		this.status = status;
-	}
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
 
-	public LocalDateTime getCreatedAt() {
-		return createdAt;
-	}
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
 
-	public void setCreatedAt(LocalDateTime createdAt) {
-		this.createdAt = createdAt;
-	}
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
 
-	public LocalDateTime getUpdatedAt() {
-		return updatedAt;
-	}
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
 
-	public void setUpdatedAt(LocalDateTime updatedAt) {
-		this.updatedAt = updatedAt;
-	}
-
-  
-    
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
 }
-

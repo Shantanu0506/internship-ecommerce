@@ -3,16 +3,7 @@ package com.example.demo.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.entities.Product;
 import com.example.demo.entities.Review;
@@ -35,7 +26,7 @@ public class ReviewController {
     @Autowired
     private UserRepository userRepo;
 
-    // Add Review
+    // 1) Add Review
     @PostMapping("/add")
     public Review addReview(@RequestParam Long productId,
                             @RequestParam Long customerId,
@@ -44,7 +35,9 @@ public class ReviewController {
         Product p = productRepo.findById(productId).orElse(null);
         User c = userRepo.findById(customerId).orElse(null);
 
-        if (p == null || c == null) return null;
+        if (p == null || c == null) {
+            return null; // किंवा इथे proper error response देऊ शकतोस
+        }
 
         review.setProduct(p);
         review.setCustomer(c);
@@ -53,19 +46,19 @@ public class ReviewController {
         return reviewRepo.save(review);
     }
 
-    // Get all reviews
+    // 2) Get all reviews
     @GetMapping
     public List<Review> getAll() {
         return reviewRepo.findAll();
     }
 
-    // Get reviews by product
+    // 3) Get reviews by product
     @GetMapping("/product/{productId}")
     public List<Review> getByProduct(@PathVariable Integer productId) {
-        return reviewRepo.findByProductProductId(productId);
+        return reviewRepo.findByProductId(productId);
     }
 
-    // Approve review
+    // 4) Approve review
     @PutMapping("/approve/{id}")
     public Review approve(@PathVariable Integer id) {
         Review r = reviewRepo.findById(id).orElse(null);
@@ -75,10 +68,9 @@ public class ReviewController {
         return reviewRepo.save(r);
     }
 
-    // Delete review
+    // 5) Delete review
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Integer id) {
         reviewRepo.deleteById(id);
     }
 }
-
