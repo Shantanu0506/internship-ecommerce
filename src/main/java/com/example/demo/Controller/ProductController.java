@@ -14,46 +14,42 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.Services.ProductService;
 import com.example.demo.entities.Product;
-import com.example.demo.repos.CategoryRepository;
 
 @RestController
 @RequestMapping("/api/products")
 public class ProductController {
 
-    @Autowired
-    private ProductService productService;
+	 @Autowired
+	    private ProductService productService;
 
-    @Autowired
-    private CategoryRepository categoryRepository;
+	    // Create
+	    @PostMapping
+	    public Product create(@RequestBody Product product) {
+	        return productService.createProduct(product);
+	    }
 
-    // Create
-    @PostMapping
-    public Product create(@RequestBody Product product) {
-        return productService.createProduct(product);
-    }
+	    // List
+	    @GetMapping
+	    public List<Product> getAll() {
+	        return productService.getAllProducts();
+	    }
 
-    // List
-    @GetMapping
-    public List<Product> getAll() {
-        return productService.getAllProducts();
-    }
+	    // Get by ID
+	    @GetMapping("/{id}")
+	    public Product getById(@PathVariable Long id) {
+	        return productService.getProductById(id);
+	    }
 
-    // Get by ID
-    @GetMapping("/{id}")
-    public Product getById(@PathVariable Long id) {
-        return productService.getProductById(id);
-    }
+	    // Update
+	    @PutMapping("/{id}")
+	    public Product update(@PathVariable Long id, @RequestBody Product product) {
+	        return productService.updateProduct(id, product);
+	    }
 
-    // Update
-    @PutMapping("/{id}")
-    public Product update(@PathVariable Long id, @RequestBody Product product) {
-        return productService.updateProduct(id, product);
-    }
-
-    // Soft delete
-    @DeleteMapping("/{id}")
-    public String delete(@PathVariable Long id) {
-        productService.softDeleteProduct(id);
-        return "Product deactivated!";
-    }
+	    // Soft delete
+	    @DeleteMapping("/{id}")
+	    public String delete(@PathVariable Long id) {
+	        productService.softDeleteProduct(id);
+	        return "Product deactivated!";
+	    }
 }

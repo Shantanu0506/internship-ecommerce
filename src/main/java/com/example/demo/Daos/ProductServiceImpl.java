@@ -13,14 +13,16 @@ import com.example.demo.repos.ProductRepository;
 @Service
 public class ProductServiceImpl implements ProductService {
 
-    @Autowired
+	@Autowired
     private ProductRepository productRepository;
 
     @Override
     public Product createProduct(Product product) {
         product.setCreatedAt(LocalDateTime.now());
         product.setUpdatedAt(LocalDateTime.now());
-        product.setStatus(true);
+        if (product.getStatus() == null) {
+            product.setStatus(true);
+        }
         return productRepository.save(product);
     }
 
@@ -42,7 +44,8 @@ public class ProductServiceImpl implements ProductService {
         existing.setName(updatedProduct.getName());
         existing.setDescription(updatedProduct.getDescription());
         existing.setPrice(updatedProduct.getPrice());
-        existing.setStock(updatedProduct.getStock());
+        existing.setSku(updatedProduct.getSku());
+        existing.setInventoryCount(updatedProduct.getInventoryCount());
         existing.setCategory(updatedProduct.getCategory());
         existing.setStatus(updatedProduct.getStatus());
         existing.setUpdatedAt(LocalDateTime.now());
@@ -57,4 +60,5 @@ public class ProductServiceImpl implements ProductService {
         product.setUpdatedAt(LocalDateTime.now());
         productRepository.save(product);
     }
+    
 }
